@@ -60,27 +60,46 @@ function evaluate(arr) {
     }
 }
 
+// function evaluateParen(arr) {
+//     // First, test to see if this function is needed, i.e., if the statement includes parentheses.
+//     if (arr.includes("(")) {
+//         // Loop through each array element to find the first close parenthesis.
+//         for (let i=0; i<arr.length; i++) {
+//             if (arr[i] === ")") {
+//                 // Find the closest preceding open parenthesis to pull out the innermost expression in parentheses.
+//                 let start = arr.lastIndexOf("(", i);
+//                 let phrase = arr.splice(start+1, (i-start-1)); // Omit the parentheses in the phrase.
+//                 let total = evaluate(phrase);
+//                 arr.splice(start-1, (i-start), total);
+//                 // Use recursion to solve any other expressions in parentheses.
+//                 return evaluateParen(arr);
+//                 } 
+//             }
+//     } else {    // If there are no parentheses, run the evaluate function.
+//         console.log(arr);
+//         return evaluate(arr);
+//     }
+// }
+
 function evaluateParen(arr) {
     // First, test to see if this function is needed, i.e., if the statement includes parentheses.
     if (arr.includes("(")) {
         // Loop through each array element to find the first close parenthesis.
-        for (let i=0; i<arr.length; i++) {
+        for (let i = 0; i < arr.length; i++) {
             if (arr[i] === ")") {
                 // Find the closest preceding open parenthesis to pull out the innermost expression in parentheses.
                 let start = arr.lastIndexOf("(", i);
-                let phrase = arr.splice(start+1, (i-start-1)); // Omit the parentheses in the phrase.
+                let phrase = arr.splice(start + 1, i - start - 1); // Omit the parentheses in the phrase.
                 let total = evaluate(phrase);
-                arr.splice(start-1, (i-start), total);
+                arr.splice(start, i - start + 1, total); // Replace the evaluated expression back into the original array.
                 // Use recursion to solve any other expressions in parentheses.
                 return evaluateParen(arr);
-                } 
             }
-    } else {    // If there are no parentheses, run the evaluate function.
-        console.log(arr);
+        }
+    } else { // If there are no parentheses, run the evaluate function.
         return evaluate(arr);
     }
 }
-
 function calculate() {
     let statement = input.textContent
             .replace("=", "")           // Remove the equal sign at the end of the expression
