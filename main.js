@@ -165,15 +165,15 @@ backspace.addEventListener("click", (e) => {
 })
 
 // Add keyboard functionality
-calcKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+', '-', '*', '/', '^', '(', ')']
+let calcKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '+', '-', '*', '/', '^', '(', ')'];
 window.addEventListener("keydown", (e) => {
     if (calcKeys.includes(e.key)) {
-        let keyInput = e.key.replace('*', 'x').replace('/', '÷')
+        let keyInput = e.key.replace('*', 'x').replace('/', '÷');
         if (output.textContent) {
             input.textContent = keyInput;
             output.textContent = '';
         } else {
-        input.textContent += keyInput;
+            input.textContent += keyInput;
         }
         e.preventDefault();
     }
